@@ -1,5 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 export interface ITodoItem {
   id: string;
@@ -10,15 +10,37 @@ export interface ITodoItem {
 interface Item {
   todo: ITodoItem;
   updateTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
 }
 
-export const TodoItem = ({ todo, updateTodo }: Item) => {
+export const TodoItem = ({ todo, updateTodo, deleteTodo }: Item) => {
   const handleUpdate = () => {
     updateTodo(todo.id);
   };
 
+  const handleDelete = () => {
+    Alert.alert(
+      "Deletar item",
+      `Tem certeza que deseja deletar o item "${todo.title}"?`,
+      [
+        {
+          text: "Sim",
+          onPress: () => {
+            deleteTodo(todo.id);
+          },
+          style: "destructive",
+        },
+        { text: "Não", style: "cancel" },
+      ]
+    );
+  };
+
   return (
-    <TouchableOpacity style={styles.container} onPress={handleUpdate}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={handleUpdate}
+      onLongPress={handleDelete}
+    >
       <Ionicons
         name={todo.completed ? "bookmark" : "bookmark-outline"}
         size={24}
