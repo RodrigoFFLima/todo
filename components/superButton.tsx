@@ -1,10 +1,12 @@
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, ViewStyle } from "react-native";
 import { styles } from "./styles";
 
 interface ISuperButton {
-  title: string;
+  title?: string;
+  children?: React.ReactNode;
   onPress?: () => void;
   disabled?: boolean;
+  style?: ViewStyle;
 }
 
 /**
@@ -15,11 +17,14 @@ interface ISuperButton {
  * @returns um lindo botão roxo
  */
 
-const SuperButton = ({ title, onPress, disabled }: ISuperButton) => {
+const SuperButton = ({ title, children, onPress, disabled, style }: ISuperButton) => {
   return (
     <TouchableOpacity
       disabled={disabled}
-      style={disabled ? styles.button_disabled : styles.button}
+      style={[
+        disabled ? styles.button_disabled : styles.button,
+        style
+      ]}
       onPress={onPress}
     >
       <Text style={styles.button_title}>{title}</Text>

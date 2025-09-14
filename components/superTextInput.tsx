@@ -1,7 +1,7 @@
-import { TextInput } from "react-native";
+import { TextInput, TextInputProps } from "react-native";
 import { styles } from "./styles";
 
-interface ISuperTextInput {
+interface ISuperTextInput extends TextInputProps {
   value: string;
   onChangeText: (text: string) => void;
 }
@@ -12,14 +12,17 @@ interface ISuperTextInput {
  * @returns Um lindo input estilizado
  */
 
-const SuperTextInput = ({ value, onChangeText }: ISuperTextInput) => {
+const SuperTextInput = ({ value, onChangeText, ...props }: ISuperTextInput) => {
   return (
     <TextInput
       value={value}
       onChangeText={onChangeText}
       placeholder="Digite algo"
       style={styles.inputText}
-    ></TextInput>
+      autoCapitalize="none"
+      autoCorrect={false}
+      {...props}
+    />
   );
 };
 

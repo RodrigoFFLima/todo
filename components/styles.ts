@@ -49,4 +49,18 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 20,
   },
+  linkText: {
+    color: theme.tint,
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 20,
+    textDecorationLine: "underline",
+  },
+  subtitle: {
+    fontSize: 16,
+    color: theme.text,
+    textAlign: "center",
+    marginBottom: 20,
+    opacity: 0.7,
+  },
 });
